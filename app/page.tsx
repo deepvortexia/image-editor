@@ -386,7 +386,7 @@ function HomeContent() {
               </>
             ) : (
               <div style={{ textAlign: 'center', padding: '2.5rem 1rem' }}>
-                <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🖼️</div>
+                <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>✏️</div>
                 <p style={{ color: '#D4AF37', fontWeight: 600, marginBottom: '0.35rem', fontSize: '1rem' }}>
                   {isDragging ? 'Drop your image here' : 'Upload an image to edit'}
                 </p>
