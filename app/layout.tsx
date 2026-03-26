@@ -8,9 +8,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "AI Image Editor - Deep Vortex AI | Edit Images with AI",
-  description: "Edit and transform images with AI. Upload any image, describe your changes, and get instant results. Part of the Deep Vortex AI creative ecosystem.",
-  keywords: "AI image editor, image editing AI, AI photo editor, edit image with text, Deep Vortex AI, AI tools, transform images, AI image editing",
+  title: "AI Image Editor — Edit Photos with AI | Deep Vortex AI",
+  description: "Edit any photo with AI in seconds. Change backgrounds, transfer styles, apply dramatic lighting, remove objects and more — just describe what you want in plain English.",
+  keywords: "AI image editor, edit photos with AI, AI photo editor, change background AI, style transfer AI, AI image editing, remove background, edit image with text, Deep Vortex AI, AI creative tools",
   authors: [{ name: "Deep Vortex AI" }],
   creator: "Deep Vortex AI",
   publisher: "Deep Vortex AI",
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://image-editor.deepvortexai.com",
-    title: "AI Image Editor - Deep Vortex AI",
-    description: "Edit and transform images with AI. Upload any image and describe your changes for instant results.",
+    title: "AI Image Editor — Edit Photos with AI | Deep Vortex AI",
+    description: "Edit any photo with AI in seconds. Change backgrounds, transfer styles, apply dramatic lighting and more — just describe what you want.",
     siteName: "Deep Vortex AI",
     locale: "en_US",
     images: [{ url: "https://image-editor.deepvortexai.com/deepgoldremoveetiny.png", width: 512, height: 512, alt: "Deep Vortex AI Image Editor" }],
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@deepvortexart",
     creator: "@deepvortexart",
-    title: "AI Image Editor - Deep Vortex AI",
-    description: "Edit and transform images with AI. Upload any image and describe your changes.",
+    title: "AI Image Editor — Edit Photos with AI | Deep Vortex AI",
+    description: "Edit any photo with AI in seconds. Change backgrounds, transfer styles, apply dramatic lighting and more.",
     images: ["https://image-editor.deepvortexai.com/deepgoldremoveetiny.png"],
   },
   icons: {
@@ -98,9 +98,13 @@ export default function RootLayout({
                 ]
               },
               "featureList": [
-                "AI-Powered Image Editing",
+                "Edit Images with AI",
+                "Change Backgrounds with AI",
+                "AI Photo Editing",
+                "Style Transfer",
+                "Remove Backgrounds",
+                "Apply Dramatic Lighting",
                 "Text-Guided Transformations",
-                "Upload Any Image",
                 "Instant Results",
                 "Download Edited Images"
               ]
