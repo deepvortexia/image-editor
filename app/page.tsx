@@ -8,10 +8,134 @@ import { Notification } from '../components/Notification';
 import { useAuth } from '@/context/AuthContext';
 import { createClient } from '@/lib/supabase/client';
 
+function WelcomeModal({ onClose }: { onClose: () => void }) {
+  const steps = [
+    { icon: '🖼️', label: 'Upload image' },
+    { icon: '✏️', label: 'Describe your edit' },
+    { icon: '⬇️', label: 'Download result' },
+  ];
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 1000,
+        background: 'rgba(0,0,0,0.75)',
+        backdropFilter: 'blur(6px)',
+        WebkitBackdropFilter: 'blur(6px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '1rem',
+      }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          background: '#111',
+          border: '1px solid rgba(212,175,55,0.45)',
+          borderRadius: '20px',
+          padding: '2rem 2rem 1.75rem',
+          maxWidth: '420px',
+          width: '100%',
+          position: 'relative',
+          boxShadow: '0 0 40px rgba(212,175,55,0.2)',
+        }}
+      >
+        {/* Close X */}
+        <button
+          onClick={onClose}
+          style={{
+            position: 'absolute', top: '1rem', right: '1rem',
+            background: 'rgba(212,175,55,0.1)',
+            border: '1px solid rgba(212,175,55,0.3)',
+            borderRadius: '50%', width: '32px', height: '32px',
+            color: '#D4AF37', cursor: 'pointer', fontSize: '1.1rem',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            lineHeight: 1,
+          }}
+        >×</button>
+
+        {/* Title */}
+        <h2 style={{
+          fontFamily: "'Orbitron', sans-serif",
+          fontSize: 'clamp(1.1rem, 3vw, 1.4rem)',
+          fontWeight: 900,
+          background: 'linear-gradient(135deg, #E8C87C 0%, #D4AF37 50%, #B8960C 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          margin: '0 0 1.5rem',
+          letterSpacing: '1px',
+          lineHeight: 1.3,
+          paddingRight: '2rem',
+        }}>
+          Welcome to AI Image Editor
+        </h2>
+
+        {/* Steps */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.75rem' }}>
+          {steps.map((step, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <div style={{
+                flexShrink: 0,
+                width: '42px', height: '42px', borderRadius: '50%',
+                background: 'linear-gradient(135deg, #E8C87C 0%, #D4AF37 50%, #B8960C 100%)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontFamily: "'Orbitron', sans-serif",
+                fontWeight: 900, fontSize: '1rem', color: '#0a0a0a',
+                boxShadow: '0 0 12px rgba(212,175,55,0.35)',
+              }}>
+                {i + 1}
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <span style={{ fontSize: '1.3rem' }}>{step.icon}</span>
+                <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.95rem', fontWeight: 500 }}>{step.label}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Buttons */}
+        <div style={{ display: 'flex', gap: '0.75rem' }}>
+          <button
+            onClick={onClose}
+            style={{
+              flex: 1,
+              padding: '0.75rem',
+              background: 'linear-gradient(135deg, #E8C87C 0%, #D4AF37 50%, #B8960C 100%)',
+              border: 'none', borderRadius: '50px',
+              color: '#0a0a0a', fontFamily: "'Orbitron', sans-serif",
+              fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.5px',
+              cursor: 'pointer', boxShadow: '0 4px 16px rgba(212,175,55,0.35)',
+            }}
+          >
+            Start Editing
+          </button>
+          <a
+            href="/how-to-use"
+            style={{
+              flex: 1,
+              padding: '0.75rem',
+              background: 'transparent',
+              border: '1px solid rgba(212,175,55,0.5)',
+              borderRadius: '50px',
+              color: '#D4AF37', fontFamily: "'Orbitron', sans-serif",
+              fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.5px',
+              cursor: 'pointer', textDecoration: 'none',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            How to Use
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function HomeContent() {
   const { refreshProfile } = useAuth();
   const supabase = createClient();
   const searchParams = useSearchParams();
+  const [showWelcome, setShowWelcome] = useState(false);
 
   const [userPrompt, setUserPrompt]         = useState('');
   const [imageFile, setImageFile]           = useState<File | null>(null);
@@ -30,6 +154,13 @@ function HomeContent() {
   const elapsedIntervalRef  = useRef<ReturnType<typeof setInterval> | null>(null);
   const fileInputRef        = useRef<HTMLInputElement>(null);
   const textareaRef         = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!localStorage.getItem('editor-welcome-seen')) {
+      setShowWelcome(true);
+      localStorage.setItem('editor-welcome-seen', '1');
+    }
+  }, []);
 
   const refreshWithRetry = useCallback(async () => {
     await refreshProfile();
@@ -193,6 +324,7 @@ function HomeContent() {
 
   return (
     <div className="app min-h-screen bg-black text-white font-sans pb-10">
+      {showWelcome && <WelcomeModal onClose={() => setShowWelcome(false)} />}
       <Header buyPack={buyPack} onBuyPackHandled={() => setBuyPack(null)} />
       <div className="particles">
         {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((left, i) => (
