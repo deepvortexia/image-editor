@@ -10,9 +10,9 @@ import { createClient } from '@/lib/supabase/client';
 
 function WelcomeModal({ onClose }: { onClose: () => void }) {
   const steps = [
-    { icon: '🖼️', label: 'Upload image' },
-    { icon: '✏️', label: 'Describe your edit' },
-    { icon: '⬇️', label: 'Download result' },
+    { title: 'Upload Your Image',    desc: 'JPG, PNG or WEBP — portraits, landscapes, product photos, even old film photos' },
+    { title: 'Describe Your Edit',   desc: "Type in plain English: 'change background to forest', 'make it look like a painting', 'add dramatic lighting'" },
+    { title: 'Download Your Result', desc: 'Your edited image is ready in seconds. Free to download and share' },
   ];
   return (
     <div
@@ -73,7 +73,7 @@ function WelcomeModal({ onClose }: { onClose: () => void }) {
         {/* Steps */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.75rem' }}>
           {steps.map((step, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
               <div style={{
                 flexShrink: 0,
                 width: '42px', height: '42px', borderRadius: '50%',
@@ -85,9 +85,9 @@ function WelcomeModal({ onClose }: { onClose: () => void }) {
               }}>
                 {i + 1}
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                <span style={{ fontSize: '1.3rem' }}>{step.icon}</span>
-                <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.95rem', fontWeight: 500 }}>{step.label}</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                <span style={{ color: '#E8C87C', fontSize: '0.95rem', fontWeight: 700 }}>{step.title}</span>
+                <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.8rem', lineHeight: 1.4 }}>{step.desc}</span>
               </div>
             </div>
           ))}
