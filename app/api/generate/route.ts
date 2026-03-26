@@ -129,7 +129,7 @@ export async function POST(req: NextRequest) {
         {
           input: {
             prompt: prompt.trim(),
-            image: imageDataUri,
+            reference_images: [imageDataUri],
           }
         }
       );
