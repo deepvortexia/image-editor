@@ -80,6 +80,7 @@ export default function Header({ buyPack, onBuyPackHandled }: HeaderProps) {
     }
   }, [loading])
 
+  // FIX: No more confirm() dialog - just sign out directly
   const handleSignOut = async () => {
     await signOut();
     router.push('/');
@@ -151,7 +152,7 @@ export default function Header({ buyPack, onBuyPackHandled }: HeaderProps) {
         <h1 className="brand-title-text">AI Image Editor</h1>
 
         {/* Tagline */}
-        <p className="primary-tagline">✏️ Upload an image · Describe your edit · Get results instantly</p>
+        <p className="primary-tagline">Upload an image · Describe your edit · Get results instantly</p>
 
         {/* Pill Buttons Container */}
         <div className="hub-pills-container">
@@ -177,6 +178,12 @@ export default function Header({ buyPack, onBuyPackHandled }: HeaderProps) {
             <span className="pill-icon">💳</span>
             <span className="pill-text">Buy Credits</span>
           </button>
+
+          {/* How to Use Pill */}
+          <Link href="/how-to-use" className="hub-pill how-to-use-pill" style={{ textDecoration: "none" }} title="How to use this tool">
+            <span className="pill-icon">📖</span>
+            <span className="pill-text">How to Use</span>
+          </Link>
 
           {/* Favorites Pill */}
           <button
