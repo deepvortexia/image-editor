@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     description: "Edit any photo with AI in seconds — change backgrounds, transfer styles, apply lighting, remove objects and more. Just describe what you want. Free online tool, no signup required. Part of Deep Vortex AI.",
     siteName: "Deep Vortex AI",
     locale: "en_US",
-    images: [{ url: "https://image-editor.deepvortexai.com/deepgoldremoveetiny.png", width: 512, height: 512, alt: "Deep Vortex AI Image Editor" }],
+    images: [{ url: "/og-image.webp", width: 512, height: 512, alt: "Deep Vortex AI Image Editor" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     creator: "@deepvortexart",
     title: "AI Image Editor Free Online — Edit Photos with AI No Signup | Deep Vortex AI",
     description: "Edit any photo with AI in seconds — change backgrounds, transfer styles, apply lighting, remove objects and more. Just describe what you want. Free online tool, no signup required. Part of Deep Vortex AI.",
-    images: ["https://image-editor.deepvortexai.com/deepgoldremoveetiny.png"],
+    images: ["/og-image.webp"],
   },
   icons: {
     icon: [
@@ -78,7 +78,7 @@ export default function RootLayout({
               "name": "Deep Vortex AI Image Editor",
               "description": "Edit and transform images with AI. Upload an image, describe your changes, get instant results.",
               "url": "https://image-editor.deepvortexai.com",
-              "image": "https://image-editor.deepvortexai.com/deepgoldremoveetiny.png",
+              "image": "/og-image.webp",
               "applicationCategory": "DesignApplication",
               "operatingSystem": "All",
               "offers": {
